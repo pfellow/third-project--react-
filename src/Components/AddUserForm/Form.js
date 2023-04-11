@@ -9,7 +9,7 @@ const Form = (props) => {
 
   const submitHandler = (event) => {
     event.preventDefault();
-    if (usernameInput.length < 3) {
+    if (usernameInput.trim().length < 3) {
       props.onAddUser(true, "username");
       return;
     }
