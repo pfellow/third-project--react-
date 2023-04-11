@@ -1,8 +1,8 @@
-import PopoverDemo from "./Components/PopoverDemo";
+import Main from "./Components/AddUserForm/Main";
 import React from "react";
 
 function App() {
-  return <PopoverDemo />;
+  return <Main />;
 }
 
 export default App;

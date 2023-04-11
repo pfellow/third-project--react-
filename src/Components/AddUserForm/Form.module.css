@@ -1,0 +1,16 @@
+.form {
+    display: flex;
+    flex-direction: column;
+    padding: .5rem;
+}
+
+.form * {
+    margin: 0.2rem;
+}
+
+.input {
+    height: 2rem;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    border: 1px solid black;
+}
