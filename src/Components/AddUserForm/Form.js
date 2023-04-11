@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useRef } from "react";
 import Button from "../UI/Buton";
 import Card from "../UI/Card";
 import styles from "./Form.module.css";
 
 const Form = (props) => {
-  const [usernameInput, setUserNameInput] = useState("");
-  const [ageInput, setAgeInput] = useState("");
+  const nameInputRef = useRef();
+  const ageInputRef = useRef();
 
   const submitHandler = (event) => {
+    const userNameInput = nameInputRef.current.value;
+    const ageInput = ageInputRef.current.value;
+
     event.preventDefault();
-    if (usernameInput.trim().length < 3) {
+    if (userNameInput.trim().length < 3) {
       props.onAddUser(true, "username");
       return;
     }
@@ -19,18 +22,11 @@ const Form = (props) => {
     }
     props.onAddUser(false, {
       id: Math.random(),
-      username: usernameInput,
+      username: userNameInput,
       age: ageInput,
     });
-    setUserNameInput("");
-    setAgeInput("");
-  };
-  const inputChangeHadler = (e) => {
-    if (e.target.matches("#username")) {
-      setUserNameInput(e.target.value);
-      return;
-    }
-    setAgeInput(e.target.value);
+    nameInputRef.current.value = "";
+    ageInputRef.current.value = "";
   };
 
   return (
@@ -41,8 +37,7 @@ const Form = (props) => {
           className={styles.input}
           type="text"
           id="username"
-          onChange={inputChangeHadler}
-          value={usernameInput}
+          ref={nameInputRef}
         ></input>
         <label htmlFor="age">Age (Years)</label>
         <input
@@ -51,8 +46,7 @@ const Form = (props) => {
           min="1"
           max="99"
           id="age"
-          onChange={inputChangeHadler}
-          value={ageInput}
+          ref={ageInputRef}
         ></input>
         <Button type="submit">Add User</Button>
       </form>
